@@ -1,10 +1,10 @@
 // import NavItem from "./navItem";
 import { Menu } from 'antd';
-import  {SettingFilled,BarChartOutlined,PictureOutlined } from '@ant-design/icons';
+import  {SettingFilled,BarChartOutlined,PictureOutlined,AppstoreOutlined } from '@ant-design/icons';
 import {NavLink} from "react-router-dom";
 // const { SubMenu } = Menu;
 import {useTranslation}  from 'react-i18next';
-
+import React from "react";
 // import  Space  from 'antd';
 
 
@@ -12,15 +12,7 @@ import {useTranslation}  from 'react-i18next';
 
 
 const Aside = ()=>{
-
   const { t } = useTranslation();
-
-
-
-
-
-
-
   return(
     <>
       <div className="scroll-sidebar">
@@ -59,6 +51,13 @@ const Aside = ()=>{
           <NavLink to='/collection'>
               <PictureOutlined />
               <span>{t('Collection')}</span>
+          </NavLink>
+        </Menu.Item>
+
+        <Menu.Item key="8">
+          <NavLink to='/products'>
+            <AppstoreOutlined />
+              <span>{t('Products')}</span>
           </NavLink>
         </Menu.Item>
 

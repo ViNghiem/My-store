@@ -1,8 +1,8 @@
+import React from "react";
+
 function InfoUser() {
   return ( 
-    <div className="card">
-
-    </div>
+    <>dsadasojij</>
 
 
    );

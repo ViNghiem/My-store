@@ -54,7 +54,7 @@ function LoginPage() {
       navigate('/')
     })
     .catch(function (error) {
-      noti(error.response.data.mess)
+      noti(error.response.data.mess)  
       console.log(error.response.data,"djsajdhsjahdahsh");
     });
   }
@@ -68,7 +68,7 @@ function LoginPage() {
     <div className='form-login'>
         <h3>{t('Login')}</h3>
 
-        <label htmlFor="username">Username
+        <label htmlFor="username">Email
           <input type="text" placeholder="Email or Phone" id="username"  onChange={(e)=>setEmail(e.target.value)}  />
         </label>
         <label htmlFor="password">Password

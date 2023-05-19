@@ -6,12 +6,28 @@
     "Collection":"bộ sưu tập",
     "Product":"Sản Phẩm",
     "Phone number":"Số điện thoại",
-    "Full Name":"Họ và tên"
-  
-  
-  
-  
-  
+    "Full Name":"Họ và tên",
+    "logout":"Đăng xuất",
+    "Avatar":"Ảnh đại diện",
+    "Products":"Sản Phẩm",
+    "All photos":"Tất cả ảnh",
+    "Photo":"Ảnh",
+    "Product name":"Tên Sản Phẩm",
+    "Price":"Giá bán",
+    "slug":"slug",
+    "Action":"Hoạt động",
+    "PRODUCT INFORMATION":"THÔNG TIN SẢN PHẨM",
+    "Describe":"Mô tả",
+    "ID Product":"ID Sản Phẩm",
+    "Image product":"Ảnh sản phẩm",
+    "Delete product":"Xoá sản phẩm",
+    "Refrest":"Làm mới",
+    "View":"Xem nhanh",
+    "Delete":"Xóa",
+    "Cancel":"Hủy",
+    "Product deletion confirmation":"Xác nhận xóa sản phẩm"
+    
+    
   
   
   

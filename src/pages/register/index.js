@@ -25,6 +25,7 @@ function RegisterPage() {
   const [email, setEmail] = useState("");
   const [password,setPassword] = useState("");
   const [username, setUsername] = useState("");
+  const [phone, setPhone] = useState("");
   
   const navigate = useNavigate();
 
@@ -40,6 +41,7 @@ function RegisterPage() {
       const neuUser = {
         username:username,
         email:email,
+        phone:phone,
         password:password,
       }
       axios.post('http://127.0.0.1:3020/user/regiter',  neuUser)
@@ -64,15 +66,20 @@ function RegisterPage() {
   </div>
   <form onSubmit={handleSingup}>
   <div className='form-login'>
-      <h3>Login Here</h3>
+      <h3>Register Here</h3>
 
       <label htmlFor="username">Username
         <input type="text" placeholder="Email or Phone" id="username"  onChange={(e)=>setUsername(e.target.value)}    />
       </label>
 
       <label htmlFor="username">Email
-        <input type="text" placeholder="Email or Phone" id="username"  onChange={(e)=>setEmail(e.target.value)}  />
+        <input type="text" placeholder="Email" id="username"  onChange={(e)=>setEmail(e.target.value)}  />
       </label>
+
+      <label htmlFor="username">Phone
+        <input type="phone" placeholder="Phone" id="username"  onChange={(e)=>setPhone(e.target.value)}  />
+      </label>
+      
       
       <label htmlFor="password">Password
       <input type="password" placeholder="Password" id="password"  onChange={(e)=>setPassword(e.target.value)}   />
