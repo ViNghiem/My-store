@@ -25,9 +25,9 @@
     "View":"Xem nhanh",
     "Delete":"Xóa",
     "Cancel":"Hủy",
-    "Product deletion confirmation":"Xác nhận xóa sản phẩm"
-    
-    
+    "Product deletion confirmation":"Xác nhận xóa sản phẩm",
+    "You're not authenticated":"Bạn chưa được cấp quyền xóa sản phẩm",
+    "Email already used":"Email này đã được sử dụng"
   
   
   

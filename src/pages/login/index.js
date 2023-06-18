@@ -9,6 +9,10 @@ import {  toast } from 'react-toastify';
 import { Link } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 
+import {useEffect} from 'react';
+
+
+
 
 
 function noti(text){
@@ -28,13 +32,31 @@ function LoginPage() {
  const { t } = useTranslation();
   const navigate = useNavigate();
   const UserInfo =  useSelector((state) => state.user.user)
-  if(UserInfo){
-    navigate('/')
-  }
+  const token = localStorage.getItem('accessToken')
+
+  useEffect(() => {
+  
+    console.log(token)
+      // navigate('/')
+    
+  },[]);
+
+
+
 
   if (localStorage.getItem('accessToken')) {
+    console.log(localStorage.getItem('accessToken'))
     navigate('/')
   }
+  
+  const handleGoogleLogin = async () => {
+    window.open("http://localhost:3020/auth/google", "_self");
+  };
+
+  const Facebook = () => {
+    window.open("http://localhost:3020/auth/facebook", "_self");
+  };
+
 
   const [email, setEmail] = useState("");
   const [password,setPassword] = useState("")
@@ -45,6 +67,7 @@ function LoginPage() {
       password:password,
     }
     axios.post('http://127.0.0.1:3020/user/login',  neuUser)
+    
     .then((res)=>{
       const user = res.data
       if (user.accessToken !== localStorage.getItem('accessToken')) {
@@ -54,8 +77,7 @@ function LoginPage() {
       navigate('/')
     })
     .catch(function (error) {
-      noti(error.response.data.mess)  
-      console.log(error.response.data,"djsajdhsjahdahsh");
+      noti(error.response.data.mess) 
     });
   }
   return ( 
@@ -76,8 +98,8 @@ function LoginPage() {
         </label>
         <button >Log In</button>
         <div className="social">
-          <div className="go"><i className="fab fa-google"></i>  Google</div>
-          <div className="fb"><i className="fab fa-facebook"></i>  Facebook</div>
+          <div className="go" onClick={handleGoogleLogin}><i className="fab fa-google"></i>  Google</div>
+          <div className="fb" onClick={Facebook} ><i className="fab fa-facebook"></i>  Facebook</div>
         </div>
         <div className='link-page'>
           <Link to="/regitser">register</Link>

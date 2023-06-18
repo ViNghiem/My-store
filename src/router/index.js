@@ -9,13 +9,40 @@ import Product from '../pages/Product';
 import EditorProduct from '../pages/Product/EditProduct'
 import React from "react";
 
+import axios from 'axios';
+import { useEffect } from 'react';
+
 const AuthLayout = () => {
+ 
+  useEffect(() => {
+    if(localStorage.getItem('accessToken')){
+      
+    }else{
+    axios.get('http://localhost:3020/auth/login/success',
+      {
+        withCredentials: true 
+      }
+    )
+    .then(function (res) {
+      console.log(res);
+      localStorage.setItem('accessToken',res.data.accessToken);
+      
+    })
+    .catch(function (error) {
+      console.log(error);
+    });
+  }
+  }, []);
+
+  
   return (
-      <Outlet />
-  );
+    <Outlet />
+  )
+
+
+
+  
 };
-
-
 
 export default createBrowserRouter([
   {
@@ -61,6 +88,8 @@ export default createBrowserRouter([
 
         ],
       },
+
+
     ],
   },
 ]);

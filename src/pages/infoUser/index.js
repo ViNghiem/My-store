@@ -51,7 +51,7 @@ const InfoUser = ()=>{
  
 
   const UserInfo =  useSelector((state) => state.user.user )
-  const [imageUrl, setImageUrl] = useState();
+  const [imageUrl, setImageUrl] = useState(UserInfo?.avartar);
   const { t } = useTranslation();
   const [loading, setLoading] = useState(false);
   const [avartar,setAvatar]=useState(UserInfo?.avartar)

@@ -15,24 +15,32 @@ const Header =()=>{
   const { t } = useTranslation();
   const navigate = useNavigate();
   const UserInfo =  useSelector((state) => state.user.user)
-  // const [User, setUser] = useState(UserInfo);
+  
   useEffect(() => {
     if(UserInfo) return ;
     const token = localStorage.getItem('accessToken')
-    axios.get(`http://127.0.0.1:3020/user/account`, {
+    axios.get(`http://localhost:3020/user/account`, {
         headers: {
           'token': `${token}`
         }
     }).then((res)=>{
       const user = res.data
+      console.log(user,"user")
       Store.dispatch(loginUser(user))
     })
   },[UserInfo]);
 
+
+
+
   const logout = ()=>{
-    localStorage.clear('accessToken')
-    Store.dispatch(clearUser())
-    navigate('/login')
+   
+    // Cookies.remove('name')
+      // localStorage.clear('accessToken')
+      // Store.dispatch(clearUser())
+      // navigate('/login')
+ 
+    
   }
 
 
@@ -40,7 +48,7 @@ const Header =()=>{
     {
       label: (
         <div className='d-fex contry' onClick={()=>{logout()}}>
-            {t  ("logout")}
+            {t ("logout")}
         </div>
       ),
       key: '0',

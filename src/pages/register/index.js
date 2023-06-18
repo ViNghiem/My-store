@@ -46,7 +46,14 @@ function RegisterPage() {
       }
       axios.post('http://127.0.0.1:3020/user/regiter',  neuUser)
       .then((res)=>{
-        navigate('/login')
+        console.log(res)
+        if(res.data.username){
+          navigate('/login')
+        }else{
+          console.log(noti)
+          noti(res.data.mess)
+        }
+       
       })
       .catch(function (error) {
         noti(error.response.data.mess)

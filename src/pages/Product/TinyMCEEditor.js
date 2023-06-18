@@ -3,9 +3,6 @@ import { Editor } from '@tinymce/tinymce-react';
 
 const TinyMCEEditor = (prods) => {
    const editorRef = useRef(null);
-  
-
-
   return (
     <>
     <Editor

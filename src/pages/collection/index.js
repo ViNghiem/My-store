@@ -6,7 +6,19 @@ import {useTranslation}  from 'react-i18next';
 // import dotenv from 'dotenv'
 // dotenv.config();
 import { Alert, Spin } from 'antd';
-
+import {  toast } from 'react-toastify';
+function noti(text){
+  toast.success(text, {
+    position: "top-right",
+    autoClose: 3000,
+    hideProgressBar: true,
+    closeOnClick: true,
+    pauseOnHover: false,
+    draggable: true,
+    progress: undefined,
+    theme: "light",
+    });
+}
 function Collection() {
   const { t } = useTranslation();
   const [ listfile, setListFile] = useState([]);
@@ -31,8 +43,9 @@ function Collection() {
       },
     })
     .then(function (response) {
-      console.log(response,"HJDHASDHASHASH  ");
+      
       setListFile(response.data)
+      noti("xóa thành công")
     })
     .catch(function (error) {
       console.log(error);
@@ -53,7 +66,7 @@ function Collection() {
     })
     .then(function (response) {
       setListFile(response.data)
-      console.log(response.data);
+     
     })
     .catch(function (error) {
       console.log(error);
@@ -90,10 +103,6 @@ function Collection() {
             <DeleteOutlined />
           </div>
         </div>
-
-
-        
-
       </div>
       <div className="row">
         { listfile ?
