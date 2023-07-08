@@ -14,31 +14,26 @@ const UploadListImg = (prods) =>{
   let list =[]
   console.log(prods,"prods")
   const AddnewImages = prods.AddnewImages
+  
   const [previewOpen, setPreviewOpen] = useState(false);
   const [previewImage, setPreviewImage] = useState('');
   const [previewTitle, setPreviewTitle] = useState('');
   const [fileList, setFileList] = useState(list);
   
-  prods.listImage.map((e,index) =>list.push({
+  prods.listImage?.map((e,index) =>list.push({
     uid: index,
       name: 'image.png',
       status: 'done',
       url: e,
   }))
-  console.log(fileList,"fileList")
 
-const sendDataImg = (listfile)=>{
-  console.log(listfile,"nsjjiahifhdshajfjsa")
+
+  const sendDataImg = (listfile)=>{
    AddnewImages(listfile)
-}
+  }
 
-
-  
 
   const handleCancel = () => setPreviewOpen(false);
-
-
-
   const handlePreview = async (file) => {
     if (!file.url && !file.preview) {
       file.preview = await getBase64(file.originFileObj);
@@ -51,19 +46,29 @@ const sendDataImg = (listfile)=>{
   const handleChange = ({ fileList: newFileList }) =>{
     console.log(newFileList,"newFileList")
     
-  const dataImg = newFileList.map(obj => { 
-    if( obj.response){
-      return obj.response.secure_url 
-    }else{
-      return obj.url 
-    }
-  });
-
+    const dataImg = newFileList.map(obj => { 
+      if(obj.response){
+        console.log("link",obj.response.newFile.image_path )
+        return obj.response.newFile.image_path 
+      }else{
+        return obj.url 
+      }
+    });
     sendDataImg(dataImg)
-
+    console.log("dataImg",dataImg)
     setFileList(newFileList);
 
   }
+
+ 
+  console.log(fileList.response?.newFile ,"fileListssssssss")
+
+
+
+
+
+
+
   const uploadButton = (
     <div>
       <PlusOutlined />
@@ -79,6 +84,7 @@ const sendDataImg = (listfile)=>{
   return (  
     <>
       <Upload
+        multiple = {true}
         action="http://localhost:3020/files/uploadphoto"
         listType="picture-card"
         fileList={fileList}

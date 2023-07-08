@@ -25,7 +25,9 @@ function App( { t }) {
       pauseOnHover
       theme="light"
       />
+
       <RouterProvider router={router} />
+      
      <ToastContainer />
     </>
   );

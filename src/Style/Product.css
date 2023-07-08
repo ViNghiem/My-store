@@ -1,0 +1,27 @@
+ul {
+  list-style: none;
+  margin: 0px;
+  padding: 0px;
+}
+
+.ant-select-selector {
+  height: 40px;
+}
+
+.ant-col.ant-col-14 label {
+  margin-top:0px;
+}
+
+.variant-item--name {
+  min-width: 230px;
+  width: 230px;
+  margin-right: 40px;
+}
+
+ .variant-list {
+  display: block;
+}
+
+ .variant-header {
+  font-weight: 600;
+}

@@ -4,12 +4,12 @@ import { useState } from "react";
 import { loginUser } from '../../redux/actions/UserAction';
 import Store from '../../store';
 import { useNavigate } from 'react-router-dom';
-import {  useSelector } from 'react-redux';
+// import {  useSelector } from 'react-redux';
 import {  toast } from 'react-toastify';
 import { Link } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 
-import {useEffect} from 'react';
+// import {useEffect} from 'react';
 
 
 
@@ -31,20 +31,21 @@ function noti(text){
 function LoginPage() {
  const { t } = useTranslation();
   const navigate = useNavigate();
-  const UserInfo =  useSelector((state) => state.user.user)
-  const token = localStorage.getItem('accessToken')
+  // const UserInfo =  useSelector((state) => state.user.user)
+  // const token = localStorage.getItem('accessToken')
 
-  useEffect(() => {
+  // useEffect(() => {
   
-    console.log(token)
-      // navigate('/')
+  //   console.log(token)
+  //     // navigate('/')
     
-  },[]);
+  // },[]);
 
 
 
 
   if (localStorage.getItem('accessToken')) {
+    console.log("sadghsgahdg")
     console.log(localStorage.getItem('accessToken'))
     navigate('/')
   }
@@ -66,7 +67,9 @@ function LoginPage() {
       email:email,
       password:password,
     }
-    axios.post('http://127.0.0.1:3020/user/login',  neuUser)
+    axios.post('http://127.0.0.1:3020/user/login',  neuUser,{
+      withCredentials: true 
+    })
     
     .then((res)=>{
       const user = res.data

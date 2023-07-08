@@ -1,4 +1,4 @@
-import axios from "axios";
+// import axios from "axios";
 import { useState,useEffect } from "react";
 import FileCollection from './fileCollection'
 import {DeleteOutlined,UploadOutlined} from'@ant-design/icons'
@@ -6,24 +6,16 @@ import {useTranslation}  from 'react-i18next';
 // import dotenv from 'dotenv'
 // dotenv.config();
 import { Alert, Spin } from 'antd';
-import {  toast } from 'react-toastify';
-function noti(text){
-  toast.success(text, {
-    position: "top-right",
-    autoClose: 3000,
-    hideProgressBar: true,
-    closeOnClick: true,
-    pauseOnHover: false,
-    draggable: true,
-    progress: undefined,
-    theme: "light",
-    });
-}
+import{Success,Error} from "../../util/index"
+import { axiosToken } from '../../util/ConfihAxios'
+
+
 function Collection() {
   const { t } = useTranslation();
   const [ listfile, setListFile] = useState([]);
   const [fileChange, setFileChange] = useState([]);
-
+  const [loader, setLoader] = useState(false);
+ 
   const handleChange = (value) => {
     let newlist = [];
     if(fileChange.includes(value)){
@@ -36,33 +28,38 @@ function Collection() {
 
 
   const handleDelete = async (data) =>{
-    console.log(data,"data")
-    axios.delete('http://localhost:3020/files/deletes', {
+   
+    const token = localStorage.getItem('accessToken')
+    console.log("dashh",token)
+    axiosToken.delete('http://localhost:3020/files/deletes', {
+
+      headers: {
+        'token': `${token}`
+      },
       params: {
         data: data
       },
     })
     .then(function (response) {
-      
       setListFile(response.data)
-      noti("xóa thành công")
+      Success("xóa thành công")
+      setLoader(true)
     })
     .catch(function (error) {
+      if(error.response){
+        Error(error.response.data)
+      }
       console.log(error);
     })
-    .finally(function () {
-      console.log("sadhjsahjsajdh")
+    .finally(function () {  
+
     });
 
-  }
-
-
-  
-
-  console.log("fileChange",fileChange)
-
+  } 
   useEffect(() => {
-    axios.get('http://localhost:3020/files/imag', {
+    
+    axiosToken.get('http://localhost:3020/files/imag', {
+      
     })
     .then(function (response) {
       setListFile(response.data)
@@ -74,7 +71,7 @@ function Collection() {
     .finally(function () {
     });
 
-  },[]);
+  },[loader]);
 
 
   

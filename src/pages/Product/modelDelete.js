@@ -20,10 +20,6 @@ function noti(text){
 
 
 
-
-
-
-
 const ModelDelete =(prods)=>{
   const navigate = useNavigate();
   const { t } = useTranslation();

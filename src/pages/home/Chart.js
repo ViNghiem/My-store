@@ -1,15 +1,10 @@
 import { LineChart,Tooltip,YAxis ,XAxis,CartesianGrid,ResponsiveContainer,Legend,Line} from "recharts";
+
+
+
 const data = [
-  {
-    "name": "Page A",
-    "uv": 10,
-    "amt": 2400
-  },
-  {
-    "name": "Page B",
-    "uv": 50,
-    "amt": 2210
-  },
+ 
+
   {
     "name": "Page C",
     "uv": 30,

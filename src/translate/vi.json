@@ -19,7 +19,7 @@
     "PRODUCT INFORMATION":"THÔNG TIN SẢN PHẨM",
     "Describe":"Mô tả",
     "ID Product":"ID Sản Phẩm",
-    "Image product":"Ảnh sản phẩm",
+    "Image product":"ẢNH SẢN PHẨM",
     "Delete product":"Xoá sản phẩm",
     "Refrest":"Làm mới",
     "View":"Xem nhanh",
@@ -27,9 +27,20 @@
     "Cancel":"Hủy",
     "Product deletion confirmation":"Xác nhận xóa sản phẩm",
     "You're not authenticated":"Bạn chưa được cấp quyền xóa sản phẩm",
-    "Email already used":"Email này đã được sử dụng"
-  
-  
-  
+    "Email already used":"Email này đã được sử dụng",
+    "Category":"Danh mục",
+    "Tag":"Thẻ sản phẩm",
+    "Model information":"THÔNG TIN MẪU MÃ",
+    "The number of products":"Số lượng sản phẩm",
+    "Quantity":"Số lượng",
+    "Staff":"Nhân viên",
+    "Name":"Tên nhân viên",
+    "Order":"Đơn hàng",
+    "Customer":"Tên Khách hàng",
+    "Total money":"Tổng tiền",
+    "Created at":"Tạo lúc",
+    "History update Product":"Lịch sử cập nhật sản phẩm"
+
+
   }
 }

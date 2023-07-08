@@ -51,6 +51,7 @@ const InfoUser = ()=>{
  
 
   const UserInfo =  useSelector((state) => state.user.user )
+  console.log("UserInfo",UserInfo)
   const [imageUrl, setImageUrl] = useState(UserInfo?.avartar);
   const { t } = useTranslation();
   const [loading, setLoading] = useState(false);
@@ -58,7 +59,7 @@ const InfoUser = ()=>{
   const [newName,setName] = useState(UserInfo?.username)
   const [newPhone,setPhone] = useState(UserInfo?.phone)
   
-  
+  console.log("imageUrl",imageUrl)
 
   const handleChange = (info) => {
    
@@ -71,6 +72,7 @@ const InfoUser = ()=>{
       getBase64(info.file.originFileObj, (url) => {
         setAvatar(info.file.response.secure_url)
         setLoading(false);
+        console.log("url",url)
         setImageUrl(url);
       });
     }
@@ -193,8 +195,6 @@ const InfoUser = ()=>{
                             )}
                           </Upload>
                         }
-
-
 
                         </div>
                         <div className='col-md-8 p-0'>

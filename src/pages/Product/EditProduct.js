@@ -41,9 +41,6 @@ console.log("discetion",discetion)
     window.open(`http://127.0.0.1:3020/product/${link}`, "_blank")
   }
 
-
-
-
 const AddnewImages = (data) => {
   setListImages(data)
 };
@@ -124,7 +121,7 @@ const UpdateProduct = (data)=>{
             <div className="com-button style-primary"><button onClick={UpdateProduct} type="button" className="ant-btn created_new_green l-save-bt ant-btn-primary"><span>Lưu sản phẩm</span></button></div>
           </div>
         </div>
-      </div>
+           </div>
 
           <div className='product-info--block'>
           <Collapse accordion  defaultActiveKey={['1']}>
@@ -151,6 +148,7 @@ const UpdateProduct = (data)=>{
             <div className="form-section">
               <label>{t('Describe')}</label>
               <TinyMCEEditor valueId='diception' initialValue={  product?.description} getcontent={getContent}/>
+           
             </div>
             </Panel>
           </Collapse>

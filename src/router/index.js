@@ -8,88 +8,112 @@ import Collection from '../pages/collection'
 import Product from '../pages/Product';
 import EditorProduct from '../pages/Product/EditProduct'
 import React from "react";
+import AuthProvider from './GetAuth'
+import CreatProduct from '../pages/Product/Creatproduct'
+import Categori from '../pages/category';
+import ListStaff from '../pages/Staff'
+import OrderPage from '../pages/Order';
+import CreatCategory from '../pages/category/CreatCategory'
+import ProductUpate from '../pages/updatehistory/ProductUpate'
 
-import axios from 'axios';
-import { useEffect } from 'react';
 
 const AuthLayout = () => {
  
-  useEffect(() => {
-    if(localStorage.getItem('accessToken')){
-      
-    }else{
-    axios.get('http://localhost:3020/auth/login/success',
-      {
-        withCredentials: true 
-      }
-    )
-    .then(function (res) {
-      console.log(res);
-      localStorage.setItem('accessToken',res.data.accessToken);
-      
-    })
-    .catch(function (error) {
-      console.log(error);
-    });
-  }
-  }, []);
-
-  
   return (
-    <Outlet />
+    < AuthProvider>
+      <Outlet />
+    </AuthProvider>
   )
-
-
-
-  
 };
 
+
+
+
+
+
+
+const objrouter = {
+  element: <AuthLayout />,
+  children: [
+    {
+      element: <LoginPage />,
+      path: '/login',
+    },
+    {
+      element: <RegisterPage />,
+      path: '/regitser',
+    },
+
+    {
+      element:  <ProtectedRoute />,
+      children: [
+        {
+          element: <Home />,
+          path: '/',
+        },
+
+        
+
+        {
+          element:< OrderPage />,
+          path: '/orders',
+        },
+
+        {
+          element: <EditorProduct />,
+          path: '/products/edit/:id',
+        },
+
+        {
+          element: <Product />,
+          path: '/products',
+        },
+
+        {
+          element: <CreatProduct />,
+          path: '/products/creat-product',
+        },
+
+        {
+          element: <ListStaff />,
+          path: '/staffs',
+        },
+
+        {
+          element: <ProductUpate />,
+          path: '/updatehistori',
+        },
+
+
+        {
+          element: <InfoUser />,
+          path: '/info',
+        },
+
+        {
+          element: <CreatCategory />,
+          path: '/categories/create',
+        },
+
+        {
+          element: <Categori />,
+          path: '/categories',
+         
+        },
+
+        {
+          element: <Collection />,
+          path: '/collection',
+        }
+
+      ],
+    },
+
+
+  ],
+}
+
+
 export default createBrowserRouter([
-  {
-    element: <AuthLayout />,
-    children: [
-      {
-        element: <LoginPage />,
-        path: '/login',
-      },
-      {
-        element: <RegisterPage />,
-        path: '/regitser',
-      },
-
-      {
-        element: <ProtectedRoute />,
-        children: [
-          {
-            element: <Home />,
-            path: '/',
-          },
-
-          {
-            element: <EditorProduct />,
-            path: '/products/edit/:id',
-          },
-
-          {
-            element: <Product />,
-            path: '/products',
-
-          },
-
-          {
-            element: <InfoUser />,
-            path: '/info',
-          },
-
-          {
-            element: <Collection />,
-            path: '/collection',
-          }
-
-        ],
-      },
-
-
-    ],
-  },
+  objrouter
 ]);
