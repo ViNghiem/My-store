@@ -1,69 +1,131 @@
 // import NavItem from "./navItem";
 import { Menu } from 'antd';
-import  {SettingFilled,BarChartOutlined,PictureOutlined,AppstoreOutlined,MailOutlined,SettingOutlined } from '@ant-design/icons';
-import {NavLink} from "react-router-dom";
+import  {TeamOutlined,FilePptOutlined,SyncOutlined,UserOutlined,BarChartOutlined,PictureOutlined,FolderOutlined,WalletOutlined } from '@ant-design/icons';
+
 // import axios from 'axios';
 // const { SubMenu } = Menu;
 // import {useEffect,useState} from 'react';
 import {useTranslation}  from 'react-i18next';
 import React from "react";
 // import  Space  from 'antd';
-// import {  useSelector } from 'react-redux';
-import { Link } from 'react-router-dom';
+import {  useSelector } from 'react-redux';
+import { Link ,useLocation } from 'react-router-dom';
 
 
 
 
 const Aside = ()=>{
   const { t } = useTranslation();
-
-  const con = (linksss)=>{
-    console.log(linksss)
-  }
-  const items = [
+  const UserInfo =  useSelector((state) => state.user.user)
+  const location = useLocation();
+  const currentPath = location.pathname;
+  const role = UserInfo?.role
+  const isAdmin = UserInfo?.isAdmin
+  const PrivateNav = [
     {
       label: <Link to="/">{  t('Statistical')}</Link>,
-      key:'1',
+      key:'/',
       icon: <BarChartOutlined />,
       children:null,
     },
 
     {
-      label: t('updatehistori'),
-      key:'2',
-      icon: <BarChartOutlined />,
-      children:[
-        {
-          label: <Link to="/updatehistori">{t('History update Product')}</Link>,
-          key:'3',
-          icon: <BarChartOutlined />
-        },
-
-      ],
+      label: <Link to="/orders">{  t('Order')}</Link>,
+      key:'/orders',
+      icon:<WalletOutlined />,
+      children:null,
     },
 
     {
-      label:<Link to="/categories">{  t('Category')}</Link>  ,
-      key:'4',
+      label: <Link to="/collection">{  t('Collection')}</Link>,
+      key:'/collection',
+      icon: <PictureOutlined />,
+      children:null,
+    },
+
+
+    {
+      label:t('Product'),
+      key:'Product',
       icon: <BarChartOutlined />,
       children:[
         {
-          label: <Link to="/updatehistori">{t('History update Product')}</Link>,
-          key:'3',
-          icon: <BarChartOutlined />
+          label: <Link to="/categories">{  t('Category')}</Link> ,
+          key:'/categories',
+          icon: <FolderOutlined />
+        },
+        {
+          label:<Link to="/products">{  t('All product')}</Link> ,
+          key:'/products',
+          icon:  <FilePptOutlined />,
         },
 
       ],
     },
 
+    
 
 
    
 
-  ];
+
+
+  ]
+
+
+  const AdminNav =[
+
+
+
+
+    {
+      label: <Link to="/staffs">{  t('Staff')}</Link>,
+      key:'/staffs',
+      icon:   <TeamOutlined />,
+      children:null,
+    },
+
+    {
+      label: t('History update'),
+      key:'updatehistori',
+      icon: <SyncOutlined />,
+      children:[
+        {
+          label: <Link to="/updatehistori">{t('History update Product')}</Link>,
+          key:'/updatehistori',
+          icon: <FilePptOutlined />
+        },
+
+      ],
+    }
+
+  ]
+
+
+  const PublicNav = [
+    {
+      label: <Link to="/info">{  t('Info')}</Link>,
+      key:'/info',
+      icon: <UserOutlined />,
+      children:null,
+    },
+  ]
+  var items = [];
+
+
+
   
 
 
+  if(isAdmin){
+    items = PrivateNav.concat(AdminNav).concat(PublicNav)
+  }else{
+    if(role ==='pending'){
+      items = PublicNav
+    }else if(role ==='approved'){
+      items = PrivateNav.concat(PublicNav)
+    }
+  }
 
 
   const onClick = (e) => {
@@ -153,7 +215,7 @@ const Aside = ()=>{
         style={{
           width: 250,
         }}
-        // defaultSelectedKeys={['1']}
+        defaultSelectedKeys={currentPath}
         // defaultOpenKeys={['sub1']}
         mode="inline"
         items={items}

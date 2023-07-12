@@ -1,57 +1,49 @@
-import { LineChart,Tooltip,YAxis ,XAxis,CartesianGrid,ResponsiveContainer,Legend,Line} from "recharts";
+import React from 'react';
+import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Legend, Tooltip } from 'recharts';
+import {useEffect,useState} from 'react';
+import { axiosToken } from '../../util/ConfihAxios'
+
+
+const GroupedBarChart = (prods) => {
+  const selectday = prods.selectday
+  const [data, setData] = useState();
 
 
 
-const data = [
- 
-
-  {
-    "name": "Page C",
-    "uv": 30,
-    "amt": 2290
-  },
-  {
-    "name": "Page D",
-    "uv": 60,
-    "amt": 2000
-  },
-  {
-    "name": "Page E",
-    "uv": 70,
+  useEffect(() => {
+   
   
-    "amt": 2181
-  },
-  {
-    "name": "Page F",
-    "uv": 20,
-    
-    "amt": 2500
-  },
-  {
-    "name": "Page G",
-    "uv": 10,
-    "amt": 2500
-  },
-  {
-    "name": "Page F",
-    "uv": 20,
-    "amt": 2500
-  }
-]
-const Chart = () =>{
-  return(
-<ResponsiveContainer width='100%' height={300}>
-    <LineChart width={730} height={250} data={data}
-      margin={{ top: 5, right: 30, left: 20, bottom: 5 }}>
-      <CartesianGrid strokeDasharray="3 3" />
-      <XAxis dataKey="name" />
-      <YAxis />
-      <Tooltip />
-      <Legend />
-      <Line type="monotone" dataKey="uv" stroke="#82ca9d" />
-    </LineChart>
-  </ResponsiveContainer>
-  )
-}
+    const token = localStorage.getItem('accessToken')
+    axiosToken.get(`http://localhost:3020/admin/orders/dataweek`, {
+      headers: {
+        'token': `${token}`   
+      },
+      params:{
+        dayselect:selectday
+      }
+  }).then((res)=>{
+    const dataa = res.data.data
+    console.log('GetDataWeek',dataa)
+    setData(dataa)
+  })
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  },[selectday]);
 
-export default Chart;
+
+  return (
+   
+          <BarChart width={1600} height={400} data={data}>
+            <CartesianGrid strokeDasharray="3 3" />
+            <XAxis dataKey="name" />
+            <YAxis />
+            <Tooltip />
+            <Legend />
+            <Bar dataKey="total" fill="#8884d8" />
+            <Bar dataKey="pending" fill="#82ca9d" />
+            <Bar dataKey="delivered" fill="#FF8042" />
+          </BarChart>
+        
+  );
+};
+
+export default GroupedBarChart;

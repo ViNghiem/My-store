@@ -1,14 +1,4 @@
 
-
-
-
-
-
-
-
-
-
-
 import { Table } from 'antd';
 import Topbar from '../../component/topbar';
 import {useEffect,useState} from 'react';
@@ -128,6 +118,22 @@ const OrderPage = ()=>{
         )
       }
     },
+
+    {
+      title: t('Status'),
+      dataIndex: 'status',
+      key: 'money',
+      render: (name,item,_id) =>{
+        return (
+          <div key={_id} className='avatar-product'>
+            <span>{item.status}</span>
+          </div>
+        )
+      }
+    },
+
+
+    
   
    
   ];

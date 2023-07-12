@@ -15,7 +15,12 @@ export default function AuthProvider({ children }) {
       )
       .then(function (res) {
         localStorage.setItem('accessToken',res.data.accessToken);
-        navigate('/')
+        if(res.data.role ==='pending'){  
+          navigate('/info')
+        }else{
+          navigate('/')
+        }
+       
       })
       .catch(function (error) {
         console.log(error);

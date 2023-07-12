@@ -122,6 +122,12 @@ const InfoUser = ()=>{
     <>
     {UserInfo?
     <div className="container-fluid">
+      {
+        UserInfo.role ==='pending'?
+        <div className='row'>
+          <div className='mess'>{t('Your account is waiting for approval, please contact Admin')} (vinghiemxk@gmail.com)</div>
+        </div>:<></>
+      }
       <div className="row">
         <div className="col-lg-3 col-xlg-3 col-md-12">
           <div className="white-box">

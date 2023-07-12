@@ -39,7 +39,16 @@
     "Customer":"Tên Khách hàng",
     "Total money":"Tổng tiền",
     "Created at":"Tạo lúc",
-    "History update Product":"Lịch sử cập nhật sản phẩm"
+    "History update Product":"Lịch sử cập nhật sản phẩm",
+    "All product":"Tất cả sản phẩm",
+    "Your account is waiting for approval, please contact Admin":"Tài khoản của bạn đang chờ phê duyệt vui lòng liên hệ Admin",
+    "History update":"Lịch sử chỉnh sửa",
+    "Status":"Trạng thái",
+    "approved":"Đã duyệt",
+    "pending":"Đang chờ",
+    "All":"Tất cả",
+    "Stats by week":"Thống kê theo tuần",
+    "Statistics by month":"Thống kê theo tháng"
 
 
   }

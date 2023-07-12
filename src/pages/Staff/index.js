@@ -1,14 +1,22 @@
-import { Table } from 'antd';
-import Topbar from '../../component/topbar';
+
 import {useEffect,useState} from 'react';
 import axios from 'axios';
 import {useTranslation}  from 'react-i18next';
+import TableUser from './TableUser'
+import {  Tabs } from 'antd';
+import {  useSelector } from 'react-redux';
 
 
 const ListStaff = ()=>{
 
   const [listUser, setListUser] = useState();
+  const [listProp,setListProp] = useState()
   const { t } = useTranslation();
+  const UserInfo =  useSelector((state) => state.user.user)
+  console.log("UserInfo",UserInfo)
+
+
+
   useEffect(() => {
     if(listUser) return ;
     const token = localStorage.getItem('accessToken')
@@ -19,69 +27,64 @@ const ListStaff = ()=>{
     }).then((res)=>{
       console.log(res.data,"nghiem")
       const data = res.data
-      console.log(typeof data)
+      console.log(data)
       const newdata = data?.map(item =>({
         ...item,
         key:item._id
       }))
+      setListProp(newdata)
       setListUser(newdata)
     })
   },[listUser]);
   console.log("listUser",listUser)
 
-  const columns = [
-    {
-      title: t('Name'),
-      dataIndex: 'name',
-      key: 'name',
-      render: (name,item,_id) =>{
-        console.log("item",item)
-        return (
-          <div key={_id} className='avatar-product avatar-user'>
-            {
-              item.avartar?
-              <img src={item.avartar}  alt='avatar'/>
-              :<div className='name-avt'>{item.username.slice(0, 2)}</div>
-            }
-            
-            <span >{item.username}</span>
-          </div>
-        )
-      }
-    },
-    {
-      title: 'Email',
-      dataIndex: 'Email',
-      key: 'age',
-      render: (name,item,_id) =>{
-        return (
-          <div key={_id} className='avatar-product'>
-            <span>{item.email }</span>
-          </div>
-        )
-      }
+  const  fillter = (key) =>{
+    console.log("nghiemmmmm",key)
+    console.log(listUser)
+    if(key !=='all'){
+      const newlist = listUser.filter((user) =>user.role === key)
+      console.log(newlist)
+      setListProp(newlist)
+    }else{
+      setListProp(listUser)
     }
-  
    
-  ];
-  
 
+  }
+  const itemsTab = [
+    {
+      label:t('All'),
+      key: 'all',
+    },
 
+    {
+      label: t(`pending`),
+      key: 'pending',
+    },
 
+    {
+      label: t(`approved`),
+      key: 'approved',
+    }
 
-
-
-
-
-
-
-
-
+  ]
   return(
   
       <>
-        <Topbar ToPage="/products/creat-product"/>
-        <Table columns={columns} dataSource={listUser} />;
+      {
+          UserInfo?.isAdmin?
+          <><Tabs
+              defaultActiveKey="1"
+              items={itemsTab}
+              onChange = {fillter}
+            />
+            <TableUser listUser={listProp} />
+          </>
+        :
+          <div className='warning'>tài khoản của bạn chưa được cấp quền xem trang này vui lòng liên hệ admin</div>
+      }
+
+
       </>
     )
   

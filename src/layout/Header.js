@@ -11,24 +11,13 @@ import {clearUser} from '../redux/actions/UserAction'
 import { Dropdown } from 'antd';
 import React from "react";
 import { axiosToken } from '../util/ConfihAxios'
-import { useLocation } from 'react-router-dom';
+
 const Header =()=>{
   const { t } = useTranslation();
   const navigate = useNavigate();
   const UserInfo =  useSelector((state) => state.user.user)
-  const location = useLocation();
-
-  console.log(location,"sahdjshakj")
-
-  
 
 
-
-
-
-
-  
-  
   useEffect(() => {
     if(UserInfo) return ;
     const token = localStorage.getItem('accessToken')
