@@ -3,14 +3,15 @@ import { useState,useEffect } from "react";
 import FileCollection from './fileCollection'
 import {DeleteOutlined,UploadOutlined} from'@ant-design/icons'
 import {useTranslation}  from 'react-i18next';
-// import dotenv from 'dotenv'
-// dotenv.config();
+
+
 import { Alert, Spin } from 'antd';
 import{Success,Error} from "../../util/index"
 import { axiosToken } from '../../util/ConfihAxios'
 
 
 function Collection() {
+
   const { t } = useTranslation();
   const [ listfile, setListFile] = useState([]);
   const [fileChange, setFileChange] = useState([]);
@@ -31,7 +32,7 @@ function Collection() {
    
     const token = localStorage.getItem('accessToken')
     console.log("dashh",token)
-    axiosToken.delete('http://localhost:3020/files/deletes', {
+    axiosToken.delete('https://leaningapinodejs.onrender.com/files/deletes', {
 
       headers: {
         'token': `${token}`
@@ -42,7 +43,7 @@ function Collection() {
     })
     .then(function (response) {
       setListFile(response.data)
-      Success("xóa thành công")
+      Success("xóa thành công") 
       setLoader(true)
     })
     .catch(function (error) {
@@ -58,7 +59,7 @@ function Collection() {
   } 
   useEffect(() => {
     
-    axiosToken.get('http://localhost:3020/files/imag', {
+    axiosToken.get('https://leaningapinodejs.onrender.com/files/imag', {
       
     })
     .then(function (response) {

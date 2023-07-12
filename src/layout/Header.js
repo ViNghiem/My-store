@@ -22,7 +22,7 @@ const Header =()=>{
     if(UserInfo) return ;
     const token = localStorage.getItem('accessToken')
     if(token){
-      axiosToken.get(`http://localhost:3020/user/account`, {
+      axiosToken.get(`https://leaningapinodejs.onrender.com/user/account`, {
           headers: {
             'token': `${token}`
           }
@@ -42,7 +42,7 @@ const Header =()=>{
 
 
   const logout = ()=>{
-      axios.get('http://localhost:3020/auth/logout',
+      axios.get('https://leaningapinodejs.onrender.com/auth/logout',
       {
         withCredentials: true 
       }

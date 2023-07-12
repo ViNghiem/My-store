@@ -31,7 +31,7 @@ const ModelDelete =(prods)=>{
 
   const handleOk = () => {
 
-  axios.delete('http://127.0.0.1:3020/products/delete', {
+  axios.delete('https://leaningapinodejs.onrender.com/products/delete', {
         params: {
           id: prods.idProduct
         }

@@ -44,7 +44,7 @@ function RegisterPage() {
         phone:phone,
         password:password,
       }
-      axios.post('http://127.0.0.1:3020/user/regiter',  neuUser)
+      axios.post('https://leaningapinodejs.onrender.com/user/regiter',  neuUser)
       .then((res)=>{
         console.log(res)
         if(res.data.username){

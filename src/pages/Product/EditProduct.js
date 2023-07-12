@@ -21,7 +21,7 @@ console.log("discetion",discetion)
 
   useEffect(() => {
     if(product) return ;
-    axios.get(`http://127.0.0.1:3020/products/${PamramsID}`, {
+    axios.get(`'https://leaningapinodejs.onrender.com/products/${PamramsID}`, {
         params: { product: PamramsID }
     }).then((res)=>{
       const data = res.data
@@ -38,7 +38,7 @@ console.log("discetion",discetion)
   }
 
   const openLink = (link) =>{
-    window.open(`http://127.0.0.1:3020/product/${link}`, "_blank")
+    window.open(`'https://leaningapinodejs.onrender.com/product/${link}`, "_blank")
   }
 
 const AddnewImages = (data) => {

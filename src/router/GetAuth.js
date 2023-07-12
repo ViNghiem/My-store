@@ -8,7 +8,7 @@ export default function AuthProvider({ children }) {
   const navigate = useNavigate();
   useEffect(() => {
     if( !localStorage.getItem('accessToken')){
-      axios.get('http://localhost:3020/auth/login/success',
+      axios.get('https://leaningapinodejs.onrender.com/auth/login/success',
         {
           withCredentials: true 
         }
@@ -26,6 +26,7 @@ export default function AuthProvider({ children }) {
         console.log(error);
       });
     }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
   return (
       <>

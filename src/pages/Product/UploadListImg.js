@@ -85,7 +85,7 @@ const UploadListImg = (prods) =>{
     <>
       <Upload
         multiple = {true}
-        action="http://localhost:3020/files/uploadphoto"
+        action="https://leaningapinodejs.onrender.com/files/uploadphoto"
         listType="picture-card"
         fileList={fileList}
         onPreview={handlePreview}

@@ -51,7 +51,7 @@ const handlePrice = (event) => {
   useEffect(() => {
     if(lisCategory) return ;
    
-    axios.get(`http://localhost:3020/admin/categories/all`,)
+    axios.get(`'https://leaningapinodejs.onrender.com/admin/categories/all`,)
     .then((res)=>{
       console.log(res.data,"nghiem")
       const data = res.data.data
@@ -81,7 +81,7 @@ const handlePrice = (event) => {
 
 
 const CreateProduct = ()=> {
-  const url = 'http://localhost:3020/products/add';
+  const url = 'https://leaningapinodejs.onrender.com/products/add';
   const slug = slugify(nameProduct, {
     replacement: '-',
     lower: true,

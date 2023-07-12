@@ -20,7 +20,7 @@ const ListStaff = ()=>{
   useEffect(() => {
     if(listUser) return ;
     const token = localStorage.getItem('accessToken')
-    axios.get(`http://localhost:3020/user/all`, {
+    axios.get(`'https://leaningapinodejs.onrender.com/user/all`, {
         headers: {
           'token': `${token}`
         },

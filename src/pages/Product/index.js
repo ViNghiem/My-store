@@ -17,7 +17,7 @@ const Product = ()=>{
   useEffect(() => {
     if(listProduct) return ;
     const token = localStorage.getItem('accessToken')
-    axiosToken.get(`http://127.0.0.1:3020/products/all`, {
+    axiosToken.get(`https://leaningapinodejs.onrender.com/products/all`, {
         headers: {
           'token': `${token}`   
         },
@@ -37,7 +37,7 @@ const Product = ()=>{
 
   const DeleteProduct = (id)=>{
     const token = localStorage.getItem('accessToken')
-    axiosToken.delete('http://127.0.0.1:3020/products/delete', {
+    axiosToken.delete('https://leaningapinodejs.onrender.com/products/delete', {
 
     headers: {
       'token': `${token}`   
