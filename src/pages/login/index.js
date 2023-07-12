@@ -51,11 +51,11 @@ function LoginPage() {
   }
   
   const handleGoogleLogin = async () => {
-    window.open("http://localhost:3020/auth/google", "_self");
+    window.open("https://leaningapinodejs.onrender.com/auth/google", "_self");
   };
 
   const Facebook = () => {
-    window.open("http://localhost:3020/auth/facebook", "_self");
+    window.open("https://leaningapinodejs.onrender.com/auth/facebook", "_self");
   };
 
 
@@ -67,7 +67,7 @@ function LoginPage() {
       email:email,
       password:password,
     }
-    axios.post('http://127.0.0.1:3020/user/login',  neuUser,{
+    axios.post('https://leaningapinodejs.onrender.com/user/login',  neuUser,{
       withCredentials: true 
     })
     
