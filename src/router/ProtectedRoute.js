@@ -6,6 +6,7 @@ import Aside from '../layout/Aside';
 export default function ProtectedRoute({ children }) {
 
   if (!localStorage.getItem('accessToken')) {
+    console.log("sdjhjsagdjgsahgfhsdgfhgdhjgg")
     return <Navigate to='/login' />;
   }
 

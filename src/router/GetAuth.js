@@ -8,7 +8,7 @@ export default function AuthProvider({ children }) {
   const navigate = useNavigate();
   useEffect(() => {
     if( !localStorage.getItem('accessToken')){
-      axios.get('https://leaningapinodejs.onrender.com/auth/login/success',
+      axios.get('http://localhost:3020/auth/login/success',
         {
           withCredentials: true 
         }

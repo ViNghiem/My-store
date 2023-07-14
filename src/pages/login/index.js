@@ -51,11 +51,11 @@ function LoginPage() {
   }
   
   const handleGoogleLogin = async () => {
-    window.open("https://leaningapinodejs.onrender.com/auth/google", "_self");
+    window.open("http://localhost:3020/auth/google", "_self");
   };
 
   const Facebook = () => {
-    window.open("https://leaningapinodejs.onrender.com/auth/facebook", "_self");
+    window.open("http://localhost:3020/auth/facebook", "_self");
   };
 
 

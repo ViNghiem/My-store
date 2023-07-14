@@ -33,8 +33,10 @@ const AuthLayout = () => {
 
 
 const objrouter = {
+
   element: <AuthLayout />,
   children: [
+    
     {
       element: <LoginPage />,
       path: '/login',
