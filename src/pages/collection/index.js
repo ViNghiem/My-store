@@ -3,7 +3,7 @@ import { useState,useEffect } from "react";
 import FileCollection from './fileCollection'
 import {DeleteOutlined,UploadOutlined} from'@ant-design/icons'
 import {useTranslation}  from 'react-i18next';
-
+import {URLAPI} from '../../util/index'
 
 import { Alert, Spin } from 'antd';
 import{Success,Error} from "../../util/index"
@@ -32,7 +32,7 @@ function Collection() {
    
     const token = localStorage.getItem('accessToken')
     console.log("dashh",token)
-    axiosToken.delete('https://leaningapinodejs.onrender.com/files/deletes', {
+    axiosToken.delete(`${URLAPI}/files/deletes`, {
 
       headers: {
         'token': `${token}`
@@ -59,7 +59,7 @@ function Collection() {
   } 
   useEffect(() => {
     
-    axiosToken.get('https://leaningapinodejs.onrender.com/files/imag', {
+    axiosToken.get(`${URLAPI}/files/imag`, {
       
     })
     .then(function (response) {

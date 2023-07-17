@@ -1,5 +1,5 @@
 import {useEffect,useState} from 'react';
-import axios from 'axios';
+// import axios from 'axios';
 import { Table } from 'antd';
 import {useTranslation}  from 'react-i18next';
 import ActionProduct from './ActionProduct'
@@ -8,7 +8,7 @@ import Topbar from '../../component/topbar';
 import VeiwAction from './WeiwAction';
 import{Success,Error} from "../../util/index"
 import { axiosToken } from '../../util/ConfihAxios'
-
+import {URLAPI} from '../../util/index'
 
 const Product = ()=>{
   const { t } = useTranslation();
@@ -17,7 +17,7 @@ const Product = ()=>{
   useEffect(() => {
     if(listProduct) return ;
     const token = localStorage.getItem('accessToken')
-    axiosToken.get(`https://leaningapinodejs.onrender.com/products/all`, {
+    axiosToken.get(`${URLAPI}/products/all`, {
         headers: {
           'token': `${token}`   
         },
@@ -28,16 +28,13 @@ const Product = ()=>{
         ...item,
         key:item._id
       }))
-
-
-
       setListProduct(newdata)
     })
   },[listProduct]);
 
   const DeleteProduct = (id)=>{
     const token = localStorage.getItem('accessToken')
-    axiosToken.delete('https://leaningapinodejs.onrender.com/products/delete', {
+    axiosToken.delete(`${URLAPI}/products/delete`, {
 
     headers: {
       'token': `${token}`   
@@ -161,9 +158,6 @@ const Product = ()=>{
     </>
    
   )
-
-
-
 
 }
 

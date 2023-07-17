@@ -10,6 +10,7 @@ import UploadListImg from './UploadListImg'
 // import Attributes from './Artributes'
 import { useState ,useEffect} from 'react';
 import{Success,Error} from "../../util/index"
+import {URLAPI} from '../../util/index'
 const CreatProduct = () =>{
 
   const [lisCategory,setListCategory] = useState()
@@ -29,20 +30,18 @@ const CreatProduct = () =>{
  
 
   const AddnewImages = (data) => {
-   console.log("dataimagesssssssssssssssssssssssssssssssssssssssssssssssssssssssssssss",data)
     setListimages(data)
-
   };
 
 
 
-const handleInputChange = (event) => {
-  setNameProduct(event.target.value);
-};
+  const handleInputChange = (event) => {
+    setNameProduct(event.target.value);
+  };
 
-const handlePrice = (event) => {
-  setPriceproduct(event.target.value);
-};
+  const handlePrice = (event) => {
+    setPriceproduct(event.target.value);
+  };
 
 
 
@@ -50,8 +49,7 @@ const handlePrice = (event) => {
 
   useEffect(() => {
     if(lisCategory) return ;
-   
-    axios.get(`'https://leaningapinodejs.onrender.com/admin/categories/all`,)
+    axios.get(`${URLAPI}/admin/categories/all`,)
     .then((res)=>{
       console.log(res.data,"nghiem")
       const data = res.data.data
@@ -81,7 +79,7 @@ const handlePrice = (event) => {
 
 
 const CreateProduct = ()=> {
-  const url = 'https://leaningapinodejs.onrender.com/products/add';
+  const url = `${URLAPI}/products/add`;
   const slug = slugify(nameProduct, {
     replacement: '-',
     lower: true,

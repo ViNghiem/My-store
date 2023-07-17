@@ -1,7 +1,7 @@
 import { PlusOutlined } from '@ant-design/icons';
 import { Modal, Upload } from 'antd';
 import { useState } from 'react';
-
+import {URLAPI} from '../../util/index'
 const getBase64 = (file) =>
   new Promise((resolve, reject) => {
     const reader = new FileReader();
@@ -85,7 +85,7 @@ const UploadListImg = (prods) =>{
     <>
       <Upload
         multiple = {true}
-        action="https://leaningapinodejs.onrender.com/files/uploadphoto"
+        action={`${URLAPI}/files/uploadphoto`}
         listType="picture-card"
         fileList={fileList}
         onPreview={handlePreview}

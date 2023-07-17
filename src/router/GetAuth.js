@@ -2,13 +2,13 @@ import { useNavigate } from 'react-router-dom';
 import { useEffect } from 'react';
 import axios from 'axios';
 // import LoginPage from '../pages/login'
-
+import {URLAPI} from '../util/index'
 
 export default function AuthProvider({ children }) {
   const navigate = useNavigate();
   useEffect(() => {
     if( !localStorage.getItem('accessToken')){
-      axios.get('https://leaningapinodejs.onrender.com/auth/login/success',
+      axios.get(`${URLAPI}/auth/login/success`,
         {
           withCredentials: true 
         }

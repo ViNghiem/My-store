@@ -8,11 +8,13 @@ import { useNavigate } from 'react-router-dom';
 import {  toast } from 'react-toastify';
 import { Link } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
-
+import {URLAPI} from '../../util/index'
 // import {useEffect} from 'react';
 
 
 
+
+console.log(process.env.REACT_APP_API_KEY)
 
 
 function noti(text){
@@ -51,11 +53,11 @@ function LoginPage() {
   }
   
   const handleGoogleLogin = async () => {
-    window.open("https://leaningapinodejs.onrender.com/auth/google", "_self");
+    window.open(`${URLAPI}/auth/google`, "_self");
   };
 
   const Facebook = () => {
-    window.open("https://leaningapinodejs.onrender.com/auth/facebook", "_self");
+    window.open(`${URLAPI}/auth/facebook`, "_self");
   };
 
 
@@ -67,7 +69,7 @@ function LoginPage() {
       email:email,
       password:password,
     }
-    axios.post('https://leaningapinodejs.onrender.com/user/login',  neuUser,{
+    axios.post(`${URLAPI}/user/login`,  neuUser,{
       withCredentials: true 
     })
     

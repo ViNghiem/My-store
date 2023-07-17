@@ -2,19 +2,17 @@ import React from 'react';
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Legend, Tooltip } from 'recharts';
 import {useEffect,useState} from 'react';
 import { axiosToken } from '../../util/ConfihAxios'
-
-
+import {URLAPI} from '../../util/index'
 const GroupedBarChart = (prods) => {
   const selectday = prods.selectday
   const [data, setData] = useState();
-
 
 
   useEffect(() => {
    
   
     const token = localStorage.getItem('accessToken')
-    axiosToken.get(`http://localhost:3020/admin/orders/dataweek`, {
+    axiosToken.get(`${URLAPI}/admin/orders/dataweek`, {
       headers: {
         'token': `${token}`   
       },

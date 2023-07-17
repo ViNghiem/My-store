@@ -5,7 +5,7 @@ import {useTranslation}  from 'react-i18next';
 import TableUser from './TableUser'
 import {  Tabs } from 'antd';
 import {  useSelector } from 'react-redux';
-
+import {URLAPI} from '../../util/index'
 
 const ListStaff = ()=>{
 
@@ -20,7 +20,7 @@ const ListStaff = ()=>{
   useEffect(() => {
     if(listUser) return ;
     const token = localStorage.getItem('accessToken')
-    axios.get(`https://leaningapinodejs.onrender.com/user/all`, {
+    axios.get(`${URLAPI}/user/all`, {
         headers: {
           'token': `${token}`
         },

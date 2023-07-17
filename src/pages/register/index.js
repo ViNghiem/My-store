@@ -4,7 +4,7 @@ import { useState } from "react";
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import {  toast } from 'react-toastify';
-
+import {URLAPI} from '../../util/index'
 
 function noti(text){
   toast.error(text, {
@@ -44,7 +44,7 @@ function RegisterPage() {
         phone:phone,
         password:password,
       }
-      axios.post('https://leaningapinodejs.onrender.com/user/regiter',  neuUser)
+      axios.post(`${URLAPI}/user/regiter`,  neuUser)
       .then((res)=>{
         console.log(res)
         if(res.data.username){

@@ -8,6 +8,9 @@ import { Input } from 'antd';
 import {  Spin } from 'antd';
 import UploadListImg from './UploadListImg';
 import ModelDelete from './modelDelete'
+import {URLAPI} from '../../util/index'
+
+
 const EditorProduct = () => {
   const { t } = useTranslation();
   const { Panel } = Collapse;
@@ -21,7 +24,7 @@ console.log("discetion",discetion)
 
   useEffect(() => {
     if(product) return ;
-    axios.get(`'https://leaningapinodejs.onrender.com/products/${PamramsID}`, {
+    axios.get(`${URLAPI}/products/${PamramsID}`, {
         params: { product: PamramsID }
     }).then((res)=>{
       const data = res.data
@@ -38,7 +41,7 @@ console.log("discetion",discetion)
   }
 
   const openLink = (link) =>{
-    window.open(`'https://leaningapinodejs.onrender.com/product/${link}`, "_blank")
+    window.open(`${URLAPI}/product/${link}`, "_blank")
   }
 
 const AddnewImages = (data) => {
@@ -58,7 +61,7 @@ console.log(newProduct,"Product update")
 
 
 const UpdateProduct = (data)=>{
-  axios.delete('http://127.0.0.1:3020/products/update', {
+  axios.delete(`${URLAPI}/products/update`, {
     params: {
       id:data.id
     }

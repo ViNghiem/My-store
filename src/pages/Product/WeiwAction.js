@@ -1,7 +1,9 @@
+import {URLAPI} from '../../util/index'
+
 const VeiwAction = (props)=>{
   const slu = props.product.slug
   const openLink = (link) =>{
-    window.open(`https://leaningapinodejs.onrender.com/product/${link}`, "_blank")
+    window.open(`${URLAPI}/product/${link}`, "_blank")
   }
  return(
   <div className="d-flex poiter" onClick={()=>openLink(slu)}>

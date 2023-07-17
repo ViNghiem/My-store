@@ -11,7 +11,7 @@ import {clearUser} from '../redux/actions/UserAction'
 import { Dropdown } from 'antd';
 import React from "react";
 import { axiosToken } from '../util/ConfihAxios'
-
+import {URLAPI} from '../util/index'
 const Header =()=>{
   const { t } = useTranslation();
   const navigate = useNavigate();
@@ -22,7 +22,7 @@ const Header =()=>{
     if(UserInfo) return ;
     const token = localStorage.getItem('accessToken')
     if(token){
-      axiosToken.get(`https://leaningapinodejs.onrender.com/user/account`, {
+      axiosToken.get(`${URLAPI}/user/account`, {
           headers: {
             'token': `${token}`
           }
@@ -42,7 +42,7 @@ const Header =()=>{
 
 
   const logout = ()=>{
-      axios.get('https://leaningapinodejs.onrender.com/auth/logout',
+      axios.get(`${URLAPI}/auth/logout`,
       {
         withCredentials: true 
       }

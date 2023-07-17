@@ -9,6 +9,7 @@ import { Input } from 'antd';
 import Store from '../../store';
 import { loginUser } from '../../redux/actions/UserAction'
 import {  toast } from 'react-toastify';
+import {URLAPI} from '../../util/index'
 
 function noti(text){
   toast.success(text, {
@@ -93,7 +94,7 @@ const InfoUser = ()=>{
 
   const UpdateProfile = (e)=>{
     e.preventDefault();
-    const url = 'http://localhost:3020/user/update';
+    const url = `${URLAPI}/user/update`;
     const data = { 
       id: UserInfo._id,
       username: newName,
@@ -183,7 +184,7 @@ const InfoUser = ()=>{
                             listType="picture-circle"
                             className="avatar-uploader"
                             showUploadList={false}
-                            action="http://localhost:3020/files/uploadphoto"
+                            action ={`${URLAPI}/files/uploadphoto`}
                             beforeUpload={beforeUpload}
                             onChange={handleChange}
                           >

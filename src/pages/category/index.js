@@ -4,7 +4,7 @@ import {useEffect,useState} from 'react';
 import axios from 'axios';
 import {useTranslation}  from 'react-i18next';
 import ActionCate from './ActionCate'
-
+import {URLAPI} from '../../util/index'
 
 
 
@@ -14,7 +14,7 @@ const Categori = ()=>{
   useEffect(() => {
     if(listCategori) return ;
     const token = localStorage.getItem('accessToken')
-    axios.get(`http://localhost:3020/admin/categories/all`, {
+    axios.get(`${URLAPI}/admin/categories/all`, {
         headers: {
           'token': `${token}`   
         },

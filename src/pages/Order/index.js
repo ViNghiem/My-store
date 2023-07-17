@@ -4,7 +4,7 @@ import Topbar from '../../component/topbar';
 import {useEffect,useState} from 'react';
 import axios from 'axios';
 import {useTranslation}  from 'react-i18next';
-
+import {URLAPI} from '../../util/index'
 
 const OrderPage = ()=>{
 
@@ -20,7 +20,7 @@ const OrderPage = ()=>{
   useEffect(() => {
     if(listUser) return ;
     const token = localStorage.getItem('accessToken')
-    axios.get(`http://localhost:3020/admin/orders/all`, {
+    axios.get(`${URLAPI}/admin/orders/all`, {
         headers: {
           'token': `${token}`
         },

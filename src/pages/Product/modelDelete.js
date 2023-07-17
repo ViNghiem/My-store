@@ -4,7 +4,7 @@ import {useTranslation}  from 'react-i18next';
 import axios from 'axios';
 import {  toast } from 'react-toastify';
 import { useNavigate } from 'react-router-dom';
-
+import {URLAPI} from '../../util/index'
 function noti(text){
   toast.success(text, {
     position: "top-right",
@@ -31,7 +31,7 @@ const ModelDelete =(prods)=>{
 
   const handleOk = () => {
 
-  axios.delete('https://leaningapinodejs.onrender.com/products/delete', {
+  axios.delete(`${URLAPI}/products/delete`, {
         params: {
           id: prods.idProduct
         }

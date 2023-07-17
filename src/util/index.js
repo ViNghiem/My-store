@@ -28,4 +28,4 @@ export const Error = (text)=>{
 }
 
 
-
+export const URLAPI = `https://leaningapinodejs.onrender.com`
