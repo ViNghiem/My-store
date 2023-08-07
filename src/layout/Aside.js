@@ -21,6 +21,7 @@ const Aside = ()=>{
   const currentPath = location.pathname;
   const role = UserInfo?.role
   const isAdmin = UserInfo?.isAdmin
+
   const PrivateNav = [
     {
       label: <Link to="/">{  t('Statistical')}</Link>,
@@ -42,8 +43,6 @@ const Aside = ()=>{
       icon: <PictureOutlined />,
       children:null,
     },
-
-
     {
       label:t('Product'),
       key:'Product',
@@ -59,25 +58,13 @@ const Aside = ()=>{
           key:'/products',
           icon:  <FilePptOutlined />,
         },
-
       ],
     },
 
-    
-
-
-   
-
-
-
-  ]
+ ]
 
 
   const AdminNav =[
-
-
-
-
     {
       label: <Link to="/staffs">{  t('Staff')}</Link>,
       key:'/staffs',
@@ -111,12 +98,6 @@ const Aside = ()=>{
     },
   ]
   var items = [];
-
-
-
-  
-
-
   if(isAdmin){
     items = PrivateNav.concat(AdminNav).concat(PublicNav)
   }else{

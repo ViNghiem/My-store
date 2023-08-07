@@ -15,10 +15,11 @@ import ListStaff from '../pages/Staff'
 import OrderPage from '../pages/Order';
 import CreatCategory from '../pages/category/CreatCategory'
 import ProductUpate from '../pages/updatehistory/ProductUpate'
-
+import OrderDetails from '../pages/Order/OrderDetails'
 
 const AuthLayout = () => {
  
+
   return (
     < AuthProvider>
       <Outlet />
@@ -27,25 +28,17 @@ const AuthLayout = () => {
 };
 
 
-
-
-
-
-
 const objrouter = {
-
   element: <AuthLayout />,
   children: [
-    
     {
       element: <LoginPage />,
       path: '/login',
     },
     {
-      element: <RegisterPage />,
+      element:  <RegisterPage />,
       path: '/regitser',
     },
-
     {
       element:  <ProtectedRoute />,
       children: [
@@ -54,11 +47,14 @@ const objrouter = {
           path: '/',
         },
 
-        
-
         {
           element:< OrderPage />,
           path: '/orders',
+        },
+
+        {
+          element:< OrderDetails />,
+          path: '/orders/:id',
         },
 
         {
@@ -107,6 +103,8 @@ const objrouter = {
           element: <Collection />,
           path: '/collection',
         }
+
+
 
       ],
     },

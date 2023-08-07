@@ -2,13 +2,19 @@
 import { Table } from 'antd';
 import Topbar from '../../component/topbar';
 import {useEffect,useState} from 'react';
-import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
 import {useTranslation}  from 'react-i18next';
 import {URLAPI} from '../../util/index'
+import StaffOrder from './StaffOrder'
+import {axiosToken} from'../../util/ConfihAxios'
+import StateOrder from './StateOrder';
 
 const OrderPage = ()=>{
 
+  const navigate = useNavigate();
+  const token = localStorage.getItem('accessToken')
   const [listUser, setListUser] = useState();
+  const [Err, setErr] = useState();
   const { t } = useTranslation();
 
   const fomatTime = (time)=>{
@@ -18,9 +24,9 @@ const OrderPage = ()=>{
   }
 
   useEffect(() => {
-    if(listUser) return ;
-    const token = localStorage.getItem('accessToken')
-    axios.get(`${URLAPI}/admin/orders/all`, {
+ 
+    axiosToken.get(`${URLAPI}/admin/orders/all`, {
+        withCredentials: true,
         headers: {
           'token': `${token}`
         },
@@ -34,18 +40,23 @@ const OrderPage = ()=>{
       }))
       setListUser(newdata)
     })
-  },[listUser]);
-  console.log("listUser",listUser)
+    .catch((err)=>{
+      setErr(err.response.data)
+      console.log('err',err)
+    })
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  },[]);
 
   const columns = [
     {
       title: t('Customer'),
       dataIndex: 'name',
       key: 'name',
+   
       render: (name,item,_id) =>{
-        console.log("item",item)
+       
         return (
-          <div key={_id} className='avatar-product avatar-user'>
+          <div key={_id} onClick={ ()=>{navigate(`/orders/${item._id}`)}} className='avatar-product avatar-user'>
             <div className='name-avt  order'>{item.full_name.slice(0, 2)}</div>
             <span >{item.full_name}</span>
           </div>
@@ -53,17 +64,16 @@ const OrderPage = ()=>{
       }
     },
 
-    {
-      title: t('Products'),
-      dataIndex: 'product',
-      key: 'product',
-      render: (name,item,_id) =>{
-        console.log("item",item)
-        return (
-          <div>Nhiều sản phẩm</div>
-        )
-      }
-    },
+    // {
+    //   title: t('Products'),
+    //   dataIndex: 'product',
+    //   key: 'product',
+    //   render: (name,item,_id) =>{
+    //     return (
+    //       <div onClick={ ()=>{navigate(`/orders/${item._id}`)}}>{}</div>
+    //     )
+    //   }
+    // },
 
     {
       title: t('Phone number'),
@@ -71,7 +81,7 @@ const OrderPage = ()=>{
       key: 'phone',
       render: (name,item,_id) =>{
         return (
-          <div key={_id} className='avatar-product'>
+          <div key={_id} className='avatar-product' onClick={ ()=>{navigate(`/orders/${item._id}`)}}>
             <span>{item.phone_number }</span>
           </div>
         )
@@ -85,7 +95,7 @@ const OrderPage = ()=>{
       key: 'age',
       render: (name,item,_id) =>{
         return (
-          <div key={_id} className='avatar-product'>
+          <div key={_id} className='avatar-product' onClick={ ()=>{navigate(`/orders/${item._id}`)}}>
             <span>{item.email }</span>
           </div>
         )
@@ -97,8 +107,9 @@ const OrderPage = ()=>{
       dataIndex: 'time',
       key: 'time',
       render: (name,item,_id) =>{
+       
         return (
-          <div key={_id} className='avatar-product'>
+          <div key={_id} className='avatar-product' onClick={ ()=>{navigate(`/orders/${item._id}`)}}>
             <span>{ fomatTime(item.orderDate) }</span>
           </div>
         )
@@ -112,7 +123,7 @@ const OrderPage = ()=>{
       key: 'money',
       render: (name,item,_id) =>{
         return (
-          <div key={_id} className='avatar-product'>
+          <div key={_id} className='avatar-product' onClick={ ()=>{navigate(`/orders/${item._id}`)}}>
             <span>{item.totalAmount.toLocaleString('vi', {style : 'currency', currency : 'VND'}) }</span>
           </div>
         )
@@ -122,27 +133,41 @@ const OrderPage = ()=>{
     {
       title: t('Status'),
       dataIndex: 'status',
-      key: 'money',
+      key: 'moneys',
       render: (name,item,_id) =>{
         return (
-          <div key={_id} className='avatar-product'>
-            <span>{item.status}</span>
-          </div>
+          <StateOrder key={item._id} id={item._id} status ={item.status} />
         )
       }
     },
 
+    {
+      title: t('Assigned staff'),
+      dataIndex: 'product',
+      key: 'product',
+      render: (name,item,_id) =>{
+        return (
+          <StaffOrder item={item}/>
+        )
+      }
+    },
 
     
-  
-   
   ];
+
+
+  
+
   
 
 
 
   return(
-  
+    Err ?
+      <>
+      Tài khoản phải là Admin
+      </>
+    :
       <>
         <Topbar ToPage="/products/creat-product"/>
         <Table columns={columns} dataSource={listUser} />;

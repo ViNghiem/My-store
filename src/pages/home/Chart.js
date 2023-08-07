@@ -13,7 +13,9 @@ const GroupedBarChart = (prods) => {
   
     const token = localStorage.getItem('accessToken')
     axiosToken.get(`${URLAPI}/admin/orders/dataweek`, {
+        withCredentials: true ,
       headers: {
+        'Content-Type': 'application/json',
         'token': `${token}`   
       },
       params:{

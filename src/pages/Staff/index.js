@@ -6,6 +6,8 @@ import TableUser from './TableUser'
 import {  Tabs } from 'antd';
 import {  useSelector } from 'react-redux';
 import {URLAPI} from '../../util/index'
+import {axiosToken} from'../../util/ConfihAxios'
+
 
 const ListStaff = ()=>{
 
@@ -20,12 +22,11 @@ const ListStaff = ()=>{
   useEffect(() => {
     if(listUser) return ;
     const token = localStorage.getItem('accessToken')
-    axios.get(`${URLAPI}/user/all`, {
+    axiosToken.get(`${URLAPI}/user/all`, {
         headers: {
           'token': `${token}`
         },
     }).then((res)=>{
-      console.log(res.data,"nghiem")
       const data = res.data
       console.log(data)
       const newdata = data?.map(item =>({

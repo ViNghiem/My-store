@@ -6,16 +6,19 @@ import {URLAPI} from './index'
 
 export const axiosToken = axios.create()
 axiosToken.interceptors.request.use(
+
+  
   async(config)=>{
-    let date = new Date()
-    const decodeToken = jwtDecode(localStorage.getItem('accessToken'))
-    console.log(decodeToken)  
-    if(decodeToken.exp < date.getTime()/1000){
+
+    const currentTime = Math.floor(Date.now() / 1000)
+    const decodeToken = await jwtDecode(localStorage.getItem('accessToken'))
+  
+    if(decodeToken.exp < currentTime){
       await axios.get(`${URLAPI}/auth/refreshtoken`,{
-          withCredentials: true
+          withCredentials: true,
         }
-      ).then((res)=>{
-          localStorage.setItem('accessToken',res.data.accessToken);
+      ).then( async (res)=>{
+        await localStorage.setItem('accessToken',res.data.accessToken);
           config.headers['token']= res.data.accessToken
       })
     }

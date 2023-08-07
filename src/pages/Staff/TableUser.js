@@ -1,7 +1,7 @@
 import { Table } from 'antd';
 import {useTranslation}  from 'react-i18next';
-import {  Popover } from 'antd';
 
+import StateUser from './StateUser'
 
 const TableUser = (props) =>{
   const { t } = useTranslation();
@@ -12,7 +12,6 @@ const TableUser = (props) =>{
       dataIndex: 'name',
       key: 'name',
       render: (name,item,_id) =>{
-        console.log("item",item)
         return (
           <div key={_id} className='avatar-product avatar-user'>
             {
@@ -44,33 +43,11 @@ const TableUser = (props) =>{
       dataIndex: 'role',
       key: 'age',
       render: (name,item,_id) =>{
-        console.log("item",item)
-        return (
-          <>
-          {item.isAdmin?
-             <div className={item.role ==='pending'? 'pending' : 'approved' }>Admin</div>
-            :
-            <Popover
-              content={<div className='poiter'>{item.role ==='pending'? t('approved') : t('pending') }</div>}
-              trigger="hover"
-            >
-              <div className={item.role ==='pending'? 'pending' : 'approved' }>{t(item.role)}</div>
-            </Popover>
-
-          }
-          </>
-          
-
-
-          // <div key={_id} className='avatar-product'>
-          //   <span>{item.role }</span>
-          // </div>
+        return(
+          <StateUser User={item} />
         )
       }
     }
-
-  
-   
   ];
 
 
@@ -83,11 +60,6 @@ const TableUser = (props) =>{
   return(
     <>
     <Table columns={columns} dataSource={listUser} />;
-    
-    
-    
-    
-    
     </>
   )
 }

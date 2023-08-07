@@ -48,7 +48,12 @@
     "pending":"Đang chờ",
     "All":"Tất cả",
     "Stats by week":"Thống kê theo tuần",
-    "Statistics by month":"Thống kê theo tháng"
+    "Statistics by month":"Thống kê theo tháng",
+    "Receptors":"Đã xác nhận",
+    "Cancel order":"Hủy đơn",
+    "Confirm":"Xác nhận",
+    "Shipping":"Đang giao hàng",
+    "Assigned staff":"Nhân viên được giao"
 
 
   }
