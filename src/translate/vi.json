@@ -2,8 +2,8 @@
   "translation": {
     "login": "Đăng Nhập",
     "Info":"Thông tin",
-    "Statistical":"thống kê",
-    "Collection":"bộ sưu tập",
+    "Statistical":"Thống kê",
+    "Collection":"Bộ sưu tập",
     "Product":"Sản Phẩm",
     "Phone number":"Số điện thoại",
     "Full Name":"Họ và tên",
@@ -53,8 +53,13 @@
     "Cancel order":"Hủy đơn",
     "Confirm":"Xác nhận",
     "Shipping":"Đang giao hàng",
-    "Assigned staff":"Nhân viên được giao"
-
+    "Assigned staff":"Nhân viên được giao",
+    "Start":"Bắt đầu",
+    "End":"Kết thúc",
+    "Delivered":"Đã nhận hàng",
+    "Refund form":"Đơn hoàn",
+    "shipped":"Đang giao",
+    "Update status":"Cập nhật trạng thái"
 
   }
 }

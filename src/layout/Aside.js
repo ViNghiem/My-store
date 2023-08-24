@@ -23,12 +23,7 @@ const Aside = ()=>{
   const isAdmin = UserInfo?.isAdmin
 
   const PrivateNav = [
-    {
-      label: <Link to="/">{  t('Statistical')}</Link>,
-      key:'/',
-      icon: <BarChartOutlined />,
-      children:null,
-    },
+    
 
     {
       label: <Link to="/orders">{  t('Order')}</Link>,
@@ -37,12 +32,7 @@ const Aside = ()=>{
       children:null,
     },
 
-    {
-      label: <Link to="/collection">{  t('Collection')}</Link>,
-      key:'/collection',
-      icon: <PictureOutlined />,
-      children:null,
-    },
+   
     {
       label:t('Product'),
       key:'Product',
@@ -51,6 +41,7 @@ const Aside = ()=>{
         {
           label: <Link to="/categories">{  t('Category')}</Link> ,
           key:'/categories',
+          title:t('Category'),
           icon: <FolderOutlined />
         },
         {
@@ -66,11 +57,28 @@ const Aside = ()=>{
 
   const AdminNav =[
     {
+      label: <Link to="/">{  t('Statistical')}</Link>,
+      key:'/',
+      icon: <BarChartOutlined />,
+      children:null,
+    },
+
+    {
+      label: <Link to="/collection">{  t('Collection')}</Link>,
+      key:'/collection',
+      icon: <PictureOutlined />,
+      children:null,
+    },
+
+
+    {
       label: <Link to="/staffs">{  t('Staff')}</Link>,
       key:'/staffs',
       icon:   <TeamOutlined />,
       children:null,
     },
+
+    
 
     {
       label: t('History update'),

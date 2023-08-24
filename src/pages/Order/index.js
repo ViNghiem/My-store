@@ -13,9 +13,16 @@ const OrderPage = ()=>{
 
   const navigate = useNavigate();
   const token = localStorage.getItem('accessToken')
-  const [listUser, setListUser] = useState();
+  const [listUser, setListUser] = useState([]);
   const [Err, setErr] = useState();
+  const [orderId, setOrderId] = useState();
   const { t } = useTranslation();
+
+  console.log("asdhgashdgashdgashjgdsaj")
+  const handleStatusUpdate = (orderId, newStatus) => {
+    console.log('--------------------------',orderId)
+    setOrderId(orderId)
+  };
 
   const fomatTime = (time)=>{
     const date = new Date(time );
@@ -24,16 +31,13 @@ const OrderPage = ()=>{
   }
 
   useEffect(() => {
- 
     axiosToken.get(`${URLAPI}/admin/orders/all`, {
         withCredentials: true,
         headers: {
           'token': `${token}`
         },
     }).then((res)=>{
-      console.log(res.data,"nghiem")
       const data = res.data.data
-      console.log(typeof data)
       const newdata = data?.map(item =>({
         ...item,
         key:item._id
@@ -44,8 +48,18 @@ const OrderPage = ()=>{
       setErr(err.response.data)
       console.log('err',err)
     })
+   if(orderId) return
   // eslint-disable-next-line react-hooks/exhaustive-deps
-  },[]);
+  },[orderId]);
+
+
+console.log("------------listUser-----------",listUser)
+
+
+
+
+
+
 
   const columns = [
     {
@@ -64,16 +78,7 @@ const OrderPage = ()=>{
       }
     },
 
-    // {
-    //   title: t('Products'),
-    //   dataIndex: 'product',
-    //   key: 'product',
-    //   render: (name,item,_id) =>{
-    //     return (
-    //       <div onClick={ ()=>{navigate(`/orders/${item._id}`)}}>{}</div>
-    //     )
-    //   }
-    // },
+  
 
     {
       title: t('Phone number'),
@@ -136,7 +141,7 @@ const OrderPage = ()=>{
       key: 'moneys',
       render: (name,item,_id) =>{
         return (
-          <StateOrder key={item._id} id={item._id} status ={item.status} />
+          <StateOrder key={item._id} id={item._id} status ={item.status}  onUpdateStatus={handleStatusUpdate} />
         )
       }
     },
@@ -147,7 +152,18 @@ const OrderPage = ()=>{
       key: 'product',
       render: (name,item,_id) =>{
         return (
-          <StaffOrder item={item}/>
+          <StaffOrder item={item} field='StaffHandlingLsy'/>
+        )
+      }
+    },
+
+      {
+      title: t('Update status'),
+      dataIndex: 'product',
+      key: 'product',
+      render: (name,item,_id) =>{
+        return (
+          <StaffOrder item={item} field='UpdateStatus'  />
         )
       }
     },
@@ -170,7 +186,7 @@ const OrderPage = ()=>{
     :
       <>
         <Topbar ToPage="/products/creat-product"/>
-        <Table columns={columns} dataSource={listUser} />;
+        <Table columns={columns} dataSource={listUser} />
       </>
     )
   

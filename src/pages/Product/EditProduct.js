@@ -9,17 +9,19 @@ import {  Spin } from 'antd';
 import UploadListImg from './UploadListImg';
 import ModelDelete from './modelDelete'
 import {URLAPI} from '../../util/index'
+import slugify from 'slugify';
 
 
 const EditorProduct = () => {
   const { t } = useTranslation();
   const { Panel } = Collapse;
   const [product, setProduct] = useState();
+  const [slug, setSlug] = useState();
   const [discetion, setDiscetion] = useState();
   const [listImages, setListImages] = useState([]);
+  const [name,setName] = useState()
   const PamramsID = useParams();
-
-console.log("discetion",discetion)
+  const [priceProduct, setPriceproduct] = useState('');
 
 
   useEffect(() => {
@@ -28,12 +30,15 @@ console.log("discetion",discetion)
         params: { product: PamramsID }
     }).then((res)=>{
       const data = res.data
+      setPriceproduct(data.price)
+      setListImages(data.images)
       setProduct(data)
+      setName(data.name)
+      setSlug(data.slug)
     })
   },[PamramsID, product]);
 
   const getContent = (content) => {
-    console.log(content,"content")
     setDiscetion(content);
   };
   const refreshPage =()=>{
@@ -44,38 +49,55 @@ console.log("discetion",discetion)
     window.open(`${URLAPI}/product/${link}`, "_blank")
   }
 
-const AddnewImages = (data) => {
-  setListImages(data)
+  const AddnewImages = (data) => {
+    console.log("---------anh--------",data)
+    
+    setListImages(data)
+  };
+
+
+const getNameProduct =(event)=>{
+  const slugNew = slugify(event.target.value, {
+    replacement: '-',
+    lower: true,
+    remove: /[*+~.()'"!:@]/g,
+    locale: 'vi',
+  });
+  setName(event.target.value);
+  setSlug(slugNew)
+}
+
+const handlePrice = (event) => {
+  setPriceproduct(event.target.value);
 };
 
 const newProduct = {
-  id:PamramsID,
-  name:"iphone 12 promax",
-  description:"iphone được sản xuất từ apple ",
-  price:"300000",
+  id:PamramsID.id,
+  name:name,
+  description:discetion,
+  price:priceProduct,
   images:listImages,
-  slug:"iphone-12-promax"
+  slug:slug
 }
 
 console.log(newProduct,"Product update")
 
 
 const UpdateProduct = (data)=>{
-  axios.delete(`${URLAPI}/products/update`, {
-    params: {
-      id:data.id
-    }
+  axios.put(`${URLAPI}/products/update`, {
+      newProduct:newProduct
   })
   .then(res => {
+    console.log(res)
+     setProduct(res.data)
+
   })
   .catch(error => {
-    
+    console.log("error",error)
+    console.log(error)
   });
 
-  setTimeout(() => {
 
-  
-  }, 3000);
 };
 
 
@@ -137,13 +159,14 @@ const UpdateProduct = (data)=>{
                   type="text"
                   className="ant-input"
                   defaultValue = { product?.name }
+                  onChange={getNameProduct}
                 />
               </div>
               <div className="form-section is-flex-1 ml-40">
-                <label>{t('ID Product')}</label>
+                <label>{t('Price')}</label>
                 <div className="com-dropdown">
                   <div className="editable ant-dropdown-trigger" data-placeholder="">
-                    <Input type="text" className="ant-input" defaultValue={product?._id} />
+                    <Input onChange={handlePrice} type="text" className="ant-input" defaultValue={product?.price} />
                   </div>
                 </div>  
               </div>

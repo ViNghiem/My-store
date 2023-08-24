@@ -21,7 +21,14 @@ export default function AuthProvider({ children }) {
         if(res.data.role ==='pending'){  
           navigate('/info')
         }else{
-        
+          const newSocket = new WebSocket('ws://localhost:3020'); 
+
+          newSocket.onopen = () => {
+            console.log('WebSocket connected');
+            // setSocket(newSocket);
+            // setId('your_unique_id');
+          };
+
           navigate('/')
         }
       })

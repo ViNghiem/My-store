@@ -56,7 +56,7 @@ const InfoUser = ()=>{
   const [imageUrl, setImageUrl] = useState(UserInfo?.avartar);
   const { t } = useTranslation();
   const [loading, setLoading] = useState(false);
-  const [avartar,setAvatar]=useState(UserInfo?.avartar)
+  const [avartar,setAvatar]=useState()
   const [newName,setName] = useState(UserInfo?.username)
   const [newPhone,setPhone] = useState(UserInfo?.phone)
   
@@ -71,6 +71,7 @@ const InfoUser = ()=>{
     if (info.file.status === 'done') {
       console.log(info.file,"aasdfghjklkjhgfdsdfghjklkjhgfddfghjkl")
       getBase64(info.file.originFileObj, (url) => {
+       
         setAvatar(info.file.response.secure_url)
         setLoading(false);
         console.log("url",url)
@@ -78,6 +79,7 @@ const InfoUser = ()=>{
       });
     }
   };
+  
   const uploadButton = (
     <div>
       {loading ? <LoadingOutlined /> : <PlusOutlined />}
@@ -91,7 +93,7 @@ const InfoUser = ()=>{
     </div>
   );
 
-
+console.log(avartar)
   const UpdateProfile = (e)=>{
     e.preventDefault();
     const url = `${URLAPI}/user/update`;
@@ -133,7 +135,7 @@ const InfoUser = ()=>{
         <div className="col-lg-3 col-xlg-3 col-md-12">
           <div className="white-box">
             <div className="user-bg">
-              <img src="https://res.cloudinary.com/dhef1t1iu/image/upload/v1680598170/iwo6boictrox64hkmdef.jpg" alt="avatar"/>
+              {/* <img src="https://res.cloudinary.com/dhef1t1iu/image/upload/v1680598170/iwo6boictrox64hkmdef.jpg" alt="avatar"/> */}
               <div className="overlay-box">
                 {
                   UserInfo ?

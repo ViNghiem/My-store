@@ -23,7 +23,6 @@ const CreatProduct = () =>{
   const { Panel } = Collapse;
 
   const getContent = (content) => {
-    console.log(content,"contentsssssssssssssss")
     setDisception(content)
   };
 

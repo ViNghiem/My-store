@@ -7,9 +7,7 @@ import  { useState } from 'react';
 const StateOrder = (props)=>{
   const { t } = useTranslation();
   const id = props.id
- 
   const [status, setStatus] = useState(props.status);
-
   const updateOrder = (id,state)=>{
     const token = localStorage.getItem('accessToken');
     const url = `${URLAPI}/admin/orders/update`;
@@ -25,13 +23,11 @@ const StateOrder = (props)=>{
         .then(response => {
           const dataa = response.data
           setStatus(dataa.order.status)
+          props.onUpdateStatus(dataa)
         })
         .catch(error => {
-        
           console.error('Error:', error);
         });
-
-
   }
   
 
@@ -59,7 +55,7 @@ switch (status) {
       <Popover
         content={
         <>
-          <div className='poiter center-flex state-order' onClick={()=>updateOrder(id,'Confirm')}><GiftOutlined /><span>{t('Shipping')}</span></div>
+          <div className='poiter center-flex state-order' onClick={()=>updateOrder(id,'shipped')}><GiftOutlined /><span>{t('Shipping')}</span></div>
           <div className='poiter  center-flex state-order'  onClick={()=>updateOrder(id,'Cancel order')}><CloseCircleOutlined /> <span>{t('Cancel order')}</span></div>
         </>
       }
@@ -68,6 +64,30 @@ switch (status) {
         <div className='approved state-order'>{t(status)}</div>
       </Popover>
       )
+
+  case `shipped`:
+    return (
+      <Popover
+        content={
+        <>
+          <div className='poiter center-flex state-order' onClick={()=>updateOrder(id,'delivered')}><GiftOutlined /><span>{t('Delivered')}</span></div>
+          <div className='poiter  center-flex state-order'  onClick={()=>updateOrder(id,'Refund-form')}><CloseCircleOutlined /> <span>{t('Refund form')}</span></div>
+        </>
+      }
+      trigger="hover"
+      >
+        <div className='approved state-order'>{t(status)}</div>
+      </Popover>
+      )
+  case `Refund-form`:
+      return (
+          <div className='poiter state-order cancel'>{t(`Refund form`)}</div>
+        )
+  case `delivered`:
+    return (
+        <div className='poiter state-order cancel delivered'>{t(`Delivered`)}</div>
+      )
+
   default:
     return (
       <Popover
